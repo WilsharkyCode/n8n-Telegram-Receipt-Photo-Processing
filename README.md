@@ -87,7 +87,7 @@ Example row (sample data):
 3. **Gemini API key:** create one in Google AI Studio and set it as the environment variable `GEMINI_API_KEY` on your n8n instance. If your n8n blocks environment access in nodes, set `N8N_BLOCK_ENV_ACCESS_IN_NODE=false` or move the key into an n8n credential.
 4. **Google credentials:** create OAuth2 credentials for Google Sheets and Google Drive in n8n.
 5. **Google Sheet:** create a sheet with a tab named `Receipts`. Put these headers in row 1, spelled exactly: `merchant`, `amount`, `currency`, `transactionDate`, `submissionDate`, `folderName`, `fileName`, `chatId`.
-6. Import `workflow/telegram-receipt-photo-processing.json`, attach the credentials, and select your sheet in the Google Sheets node.
+6. Import `telegram-receipt-photo-processing.json`, attach the credentials, and select your sheet in the Google Sheets node.
 7. Activate the workflow, then send a receipt photo to your bot.
 
 ## Testing
