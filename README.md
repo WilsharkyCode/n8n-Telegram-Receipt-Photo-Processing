@@ -94,26 +94,6 @@ Example row (sample data):
 
 See [docs/test-plan.md](docs/test-plan.md).
 
-## Known limitations
-
-- **Photos only.** The trigger listens to all messages. A text message, or a photo sent as a file (not as a photo), makes the workflow error out with "No photo found", and the sender gets no reply.
-- **No error feedback to the user.** If Gemini, the sheet or Drive fails, the execution fails silently from the sender's point of view.
-- **Submission date is UTC.** The folder date comes from `new Date().toISOString()`, so a receipt sent between midnight and 8 AM in the Philippines lands in the previous day's folder.
-- **Same filename for same-day receipts.** Files are named `receipt_<date>_<chatId>.jpg`, so two receipts from one chat on one day share a name. Drive keeps both, but they can't be told apart by name.
-- **No access control.** Anyone who finds the bot can submit photos, which then go to your sheet, your Drive and the Gemini API. The workflow doesn't check the sender's chat ID.
-- **Unvalidated extraction.** Gemini's output is not checked against a schema. If the model uses different key names or misreads a total, the wrong value is logged. Amounts are stored as text.
-- **Partial failure.** The sheet row is written before the Drive upload, so a Drive failure leaves a row with no stored image.
-- **Concurrent uploads.** If two receipts arrive at the same moment on a new day, both may create the date folder.
-- **No duplicate detection.** Sending the same receipt twice logs it twice.
-
-## Possible improvements
-
-- Restrict the trigger to allowed chat IDs
-- Reply with a helpful message when the input isn't a photo or extraction fails
-- Use Gemini's response schema so the output keys and types are guaranteed
-- Use the local date for folders and add a unique suffix to filenames
-- Add a review step for low-confidence extractions
-- Monthly totals or a category breakdown in the sheet
 
 ## Tech
 
